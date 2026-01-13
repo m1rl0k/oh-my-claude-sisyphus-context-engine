@@ -1733,7 +1733,7 @@ else
 fi
 
 # Save version metadata for auto-update system
-VERSION="1.11.1"
+VERSION="1.11.2"
 VERSION_FILE="$CLAUDE_CONFIG_DIR/.sisyphus-version.json"
 
 cat > "$VERSION_FILE" << VERSION_EOF
