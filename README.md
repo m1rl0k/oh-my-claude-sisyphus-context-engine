@@ -62,6 +62,7 @@ Choose **ONE** installation method below. Do not mix methods.
 
 ```bash
 # In Claude Code, run:
+/plugin marketplace add Yeachan-Heo/oh-my-claude-sisyphus 
 /plugin install oh-my-claude-sisyphus
 ```
 
