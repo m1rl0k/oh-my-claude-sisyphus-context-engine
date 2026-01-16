@@ -727,7 +727,7 @@ Execute this bash command to download fresh CLAUDE.md to local project config:
 
 ```bash
 # Download fresh CLAUDE.md to project-local .claude/
-curl -fsSL "https://raw.githubusercontent.com/Yeachan-Heo/oh-my-claude-sisyphus/main/docs/CLAUDE.md" -o .claude/CLAUDE.md && \
+curl -fsSL "https://raw.githubusercontent.com/m1rl0k/oh-my-claude-sisyphus-context-engine/main/docs/CLAUDE.md" -o .claude/CLAUDE.md && \
 echo "✅ CLAUDE.md downloaded successfully to .claude/CLAUDE.md" || \
 echo "❌ Failed to download CLAUDE.md"
 ```
@@ -736,7 +736,7 @@ echo "❌ Failed to download CLAUDE.md"
 
 **FALLBACK** if curl fails:
 Tell user to manually download from:
-https://raw.githubusercontent.com/Yeachan-Heo/oh-my-claude-sisyphus/main/docs/CLAUDE.md
+https://raw.githubusercontent.com/m1rl0k/oh-my-claude-sisyphus-context-engine/main/docs/CLAUDE.md
 
 ### Step 3: Verify Plugin Installation
 
@@ -797,7 +797,7 @@ Execute this bash command to erase and download fresh CLAUDE.md to global config
 ```bash
 # Remove existing CLAUDE.md and download fresh from GitHub
 rm -f ~/.claude/CLAUDE.md && \
-curl -fsSL "https://raw.githubusercontent.com/Yeachan-Heo/oh-my-claude-sisyphus/main/docs/CLAUDE.md" -o ~/.claude/CLAUDE.md && \
+curl -fsSL "https://raw.githubusercontent.com/m1rl0k/oh-my-claude-sisyphus-context-engine/main/docs/CLAUDE.md" -o ~/.claude/CLAUDE.md && \
 echo "✅ CLAUDE.md downloaded successfully to ~/.claude/CLAUDE.md" || \
 echo "❌ Failed to download CLAUDE.md"
 ```
@@ -806,7 +806,7 @@ echo "❌ Failed to download CLAUDE.md"
 
 **FALLBACK** if curl fails:
 Tell user to manually download from:
-https://raw.githubusercontent.com/Yeachan-Heo/oh-my-claude-sisyphus/main/docs/CLAUDE.md
+https://raw.githubusercontent.com/m1rl0k/oh-my-claude-sisyphus-context-engine/main/docs/CLAUDE.md
 
 ### Step 2: Clean Up Legacy Hooks (if present)
 
@@ -1217,7 +1217,7 @@ INPUT=$(cat)
   STATE_FILE="$HOME/.claude/.sisyphus-silent-update.json"
   LOG_FILE="$HOME/.claude/.sisyphus-update.log"
   CHECK_INTERVAL_HOURS=24
-  REPO_URL="https://raw.githubusercontent.com/Yeachan-Heo/oh-my-claude-sisyphus/main"
+  REPO_URL="https://raw.githubusercontent.com/m1rl0k/oh-my-claude-sisyphus-context-engine/main"
 
   # Log function (silent - only to file)
   log() {
@@ -1850,7 +1850,7 @@ echo ""
 echo -e "${YELLOW}Updating:${NC}"
 echo "  /update                       # Check for and install updates"
 echo "  # Or run this install script again:"
-echo "  curl -fsSL https://raw.githubusercontent.com/Yeachan-Heo/oh-my-claude-sisyphus/main/scripts/install.sh | bash"
+echo "  curl -fsSL https://raw.githubusercontent.com/m1rl0k/oh-my-claude-sisyphus-context-engine/main/scripts/install.sh | bash"
 echo ""
 echo -e "${YELLOW}After Updates:${NC}"
 echo "  Run '/sisyphus-default' (project) or '/sisyphus-default-global' (global)"

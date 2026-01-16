@@ -60,11 +60,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Yeachan-Heo/oh-my-claude-sisyphus.git"
+    "url": "git+https://github.com/m1rl0k/oh-my-claude-sisyphus-context-engine.git"
   },
-  "homepage": "https://github.com/Yeachan-Heo/oh-my-claude-sisyphus#readme",
+  "homepage": "https://github.com/m1rl0k/oh-my-claude-sisyphus-context-engine#readme",
   "bugs": {
-    "url": "https://github.com/Yeachan-Heo/oh-my-claude-sisyphus/issues"
+    "url": "https://github.com/m1rl0k/oh-my-claude-sisyphus-context-engine/issues"
   },
   "author": "Yeachan Heo",
   "license": "MIT",
