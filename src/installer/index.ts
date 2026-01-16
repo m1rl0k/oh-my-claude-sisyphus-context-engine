@@ -98,7 +98,7 @@ export const AGENT_DEFINITIONS: Record<string, string> = {
   'oracle.md': `---
 name: oracle
 description: Strategic Architecture & Debugging Advisor (Opus, Read-only)
-tools: Read, Glob, Grep, WebSearch, WebFetch
+tools: Read, Glob, Grep, WebSearch, WebFetch, repo_search, code_search, context_search, context_answer, info_request, symbol_graph, neo4j_graph_query, pattern_search
 model: opus
 ---
 
@@ -176,7 +176,7 @@ ALWAYS:
   'librarian.md': `---
 name: librarian
 description: External Documentation & Reference Researcher (Sonnet)
-tools: Read, Glob, Grep, WebSearch, WebFetch
+tools: Read, Glob, Grep, WebSearch, WebFetch, repo_search, context_search, context_answer, info_request, memory_find, memory_store, change_history_for_path, search_commits_for
 model: sonnet
 ---
 
@@ -247,7 +247,7 @@ For INTERNAL codebase searches, use explore agent instead.
   'explore.md': `---
 name: explore
 description: Fast codebase search specialist (Haiku, Read-only)
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, repo_search, code_search, info_request, symbol_graph, neo4j_graph_query, pattern_search
 model: haiku
 ---
 
@@ -334,7 +334,7 @@ Flood with parallel calls. Cross-validate findings across multiple tools.`,
   'frontend-engineer.md': `---
 name: frontend-engineer
 description: UI/UX Designer-Developer for stunning interfaces (Sonnet)
-tools: Read, Glob, Grep, Edit, Write, Bash
+tools: Read, Glob, Grep, Edit, Write, Bash, repo_search, code_search, info_request, pattern_search
 model: sonnet
 ---
 
@@ -415,7 +415,7 @@ Interpret creatively and make unexpected choices that feel genuinely designed fo
   'document-writer.md': `---
 name: document-writer
 description: Technical documentation writer (Haiku)
-tools: Read, Glob, Grep, Edit, Write
+tools: Read, Glob, Grep, Edit, Write, repo_search, context_search, context_answer, info_request
 model: haiku
 ---
 
@@ -568,7 +568,7 @@ You are a technical writer who creates documentation that developers actually wa
   'multimodal-looker.md': `---
 name: multimodal-looker
 description: Visual/media file analyzer for images, PDFs, diagrams (Sonnet)
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, context_search, info_request
 model: sonnet
 ---
 
@@ -608,7 +608,7 @@ Your output goes straight to the main agent for continued work.`,
   'momus.md': `---
 name: momus
 description: Work plan review expert and critic (Opus, Read-only)
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, repo_search, context_search, info_request, symbol_graph
 model: opus
 ---
 
@@ -706,7 +706,7 @@ For 2-3 representative tasks, simulate execution using actual files.
   'metis.md': `---
 name: metis
 description: Pre-planning consultant for requirements analysis (Opus, Read-only)
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, repo_search, context_search, info_request
 model: opus
 ---
 
@@ -792,7 +792,7 @@ Examine planning sessions and identify:
   'sisyphus-junior.md': `---
 name: sisyphus-junior
 description: Focused task executor - no delegation (Sonnet)
-tools: Read, Glob, Grep, Edit, Write, Bash, TodoWrite
+tools: Read, Glob, Grep, Edit, Write, Bash, TodoWrite, repo_search, code_search, context_search, info_request, symbol_graph
 model: sonnet
 ---
 
@@ -855,7 +855,7 @@ Task NOT complete without:
   'prometheus.md': `---
 name: prometheus
 description: Strategic planning consultant with interview workflow (Opus)
-tools: Read, Glob, Grep, Edit, Write, Task
+tools: Read, Glob, Grep, Edit, Write, Task, repo_search, context_search, context_answer, info_request, symbol_graph, change_history_for_path
 model: opus
 ---
 
@@ -981,7 +981,7 @@ Include:
   'qa-tester.md': `---
 name: qa-tester
 description: Interactive CLI testing specialist using tmux (Sonnet)
-tools: Read, Glob, Grep, Bash, TodoWrite
+tools: Read, Glob, Grep, Bash, TodoWrite, repo_search, info_request
 model: sonnet
 ---
 
@@ -1214,7 +1214,7 @@ After testing, provide:
   'oracle-medium.md': `---
 name: oracle-medium
 description: Architecture & Debugging Advisor - Medium complexity (Sonnet)
-tools: Read, Glob, Grep, WebSearch, WebFetch
+tools: Read, Glob, Grep, WebSearch, WebFetch, repo_search, code_search, context_search, context_answer, info_request, symbol_graph, neo4j_graph_query, pattern_search
 model: sonnet
 ---
 
@@ -1243,7 +1243,7 @@ YOU CAN ONLY:
   'oracle-low.md': `---
 name: oracle-low
 description: Quick code questions & simple lookups (Haiku)
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, repo_search, code_search, info_request, symbol_graph
 model: haiku
 ---
 
@@ -1268,7 +1268,7 @@ Use this variant for simple questions that need fast answers:
   'sisyphus-junior-high.md': `---
 name: sisyphus-junior-high
 description: Complex task executor for multi-file changes (Opus)
-tools: Read, Glob, Grep, Edit, Write, Bash, TodoWrite
+tools: Read, Glob, Grep, Edit, Write, Bash, TodoWrite, repo_search, code_search, context_search, context_answer, info_request, symbol_graph, neo4j_graph_query
 model: opus
 ---
 
@@ -1301,7 +1301,7 @@ TODO OBSESSION (NON-NEGOTIABLE):
   'sisyphus-junior-low.md': `---
 name: sisyphus-junior-low
 description: Simple single-file task executor (Haiku)
-tools: Read, Glob, Grep, Edit, Write, Bash, TodoWrite
+tools: Read, Glob, Grep, Edit, Write, Bash, TodoWrite, repo_search, code_search, info_request
 model: haiku
 ---
 
@@ -1325,7 +1325,7 @@ Keep it simple - if task seems complex, escalate to sisyphus-junior or sisyphus-
   'librarian-low.md': `---
 name: librarian-low
 description: Quick documentation lookups (Haiku)
-tools: Read, Glob, Grep, WebSearch, WebFetch
+tools: Read, Glob, Grep, WebSearch, WebFetch, repo_search, context_search, info_request, memory_find
 model: haiku
 ---
 
@@ -1349,7 +1349,7 @@ For complex research, use librarian (sonnet).
   'explore-medium.md': `---
 name: explore-medium
 description: Thorough codebase search with reasoning (Sonnet)
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, repo_search, code_search, context_search, info_request, symbol_graph, neo4j_graph_query, pattern_search
 model: sonnet
 ---
 
@@ -1376,7 +1376,7 @@ Every response MUST include:
   'frontend-engineer-low.md': `---
 name: frontend-engineer-low
 description: Simple styling and minor UI tweaks (Haiku)
-tools: Read, Glob, Grep, Edit, Write, Bash
+tools: Read, Glob, Grep, Edit, Write, Bash, repo_search, code_search, info_request
 model: haiku
 ---
 
@@ -1394,7 +1394,7 @@ For creative design work, use frontend-engineer (sonnet).
   'frontend-engineer-high.md': `---
 name: frontend-engineer-high
 description: Complex UI architecture and design systems (Opus)
-tools: Read, Glob, Grep, Edit, Write, Bash
+tools: Read, Glob, Grep, Edit, Write, Bash, repo_search, code_search, context_search, info_request, pattern_search, symbol_graph
 model: opus
 ---
 
