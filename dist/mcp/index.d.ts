@@ -1,8 +1,8 @@
 /**
  * MCP Server Module Exports
  */
-export { createExaServer, createContext7Server, createPlaywrightServer, createFilesystemServer, createMemoryServer, getDefaultMcpServers, toSdkMcpFormat } from './servers.js';
-export type { McpServerConfig, McpServersConfig } from './servers.js';
+export { createExaServer, createContext7Server, createPlaywrightServer, createFilesystemServer, createMemoryServer, createContextEngineIndexerServer, createContextEngineMemoryServer, getDefaultMcpServers, toSdkMcpFormat } from './servers.js';
+export type { McpServerConfig, RemoteMcpServerConfig, McpServersConfig } from './servers.js';
 export { omcToolsServer, omcToolNames, getOmcToolNames } from './omc-tools-server.js';
 export { resolveSystemPrompt, buildPromptWithSystemContext, VALID_AGENT_ROLES, getValidAgentRoles, isValidAgentRoleName } from '../agents/prompt-helpers.js';
 export type { AgentRole } from '../agents/prompt-helpers.js';

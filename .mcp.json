@@ -7,6 +7,20 @@
     "team": {
       "command": "node",
       "args": ["${CLAUDE_PLUGIN_ROOT}/bridge/team-mcp.cjs"]
+    },
+    "context-engine-indexer": {
+      "type": "streamable-http",
+      "url": "https://dev.context-engine.ai/indexer/mcp",
+      "headers": {
+        "Authorization": "Bearer ${CONTEXT_ENGINE_API_TOKEN}"
+      }
+    },
+    "context-engine-memory": {
+      "type": "streamable-http",
+      "url": "https://dev.context-engine.ai/memory/mcp",
+      "headers": {
+        "Authorization": "Bearer ${CONTEXT_ENGINE_API_TOKEN}"
+      }
     }
   }
 }

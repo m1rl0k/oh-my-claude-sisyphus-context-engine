@@ -8,11 +8,13 @@ export {
   createPlaywrightServer,
   createFilesystemServer,
   createMemoryServer,
+  createContextEngineIndexerServer,
+  createContextEngineMemoryServer,
   getDefaultMcpServers,
   toSdkMcpFormat
 } from './servers.js';
 
-export type { McpServerConfig, McpServersConfig } from './servers.js';
+export type { McpServerConfig, RemoteMcpServerConfig, McpServersConfig } from './servers.js';
 
 // OMC Tools Server - in-process MCP server for custom tools
 export {

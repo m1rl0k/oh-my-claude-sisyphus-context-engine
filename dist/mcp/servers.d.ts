@@ -7,11 +7,20 @@
  * - Playwright: Browser automation
  * - Filesystem: Sandboxed file system access
  * - Memory: Persistent knowledge graph
+ * - Context-Engine: Semantic code search and memory (SaaS, remote HTTP)
  */
 export interface McpServerConfig {
     command: string;
     args: string[];
     env?: Record<string, string>;
+}
+/**
+ * Remote MCP server config for HTTP/SSE-based MCP servers.
+ * Used by Context-Engine SaaS and other remote MCP endpoints.
+ */
+export interface RemoteMcpServerConfig {
+    url: string;
+    headers?: Record<string, string>;
 }
 /**
  * Exa MCP Server - AI-powered web search
@@ -38,6 +47,8 @@ export declare function createFilesystemServer(allowedPaths: string[]): McpServe
  * Allows agents to store and retrieve information across sessions
  */
 export declare function createMemoryServer(): McpServerConfig;
+export declare function createContextEngineIndexerServer(): RemoteMcpServerConfig | null;
+export declare function createContextEngineMemoryServer(): RemoteMcpServerConfig | null;
 /**
  * Get all default MCP servers for the OMC system
  */
@@ -46,6 +57,8 @@ export interface McpServersConfig {
     context7?: McpServerConfig;
     playwright?: McpServerConfig;
     memory?: McpServerConfig;
+    'context-engine-indexer'?: RemoteMcpServerConfig;
+    'context-engine-memory'?: RemoteMcpServerConfig;
 }
 export declare function getDefaultMcpServers(options?: {
     exaApiKey?: string;
@@ -53,9 +66,11 @@ export declare function getDefaultMcpServers(options?: {
     enableContext7?: boolean;
     enablePlaywright?: boolean;
     enableMemory?: boolean;
+    enableContextEngine?: boolean;
 }): McpServersConfig;
 /**
  * Convert MCP servers config to SDK format
+ * Supports both stdio (McpServerConfig) and remote (RemoteMcpServerConfig) servers.
  */
-export declare function toSdkMcpFormat(servers: McpServersConfig): Record<string, McpServerConfig>;
+export declare function toSdkMcpFormat(servers: McpServersConfig): Record<string, McpServerConfig | RemoteMcpServerConfig>;
 //# sourceMappingURL=servers.d.ts.map

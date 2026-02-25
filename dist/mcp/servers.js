@@ -7,6 +7,7 @@
  * - Playwright: Browser automation
  * - Filesystem: Sandboxed file system access
  * - Memory: Persistent knowledge graph
+ * - Context-Engine: Semantic code search and memory (SaaS, remote HTTP)
  */
 /**
  * Exa MCP Server - AI-powered web search
@@ -59,6 +60,47 @@ export function createMemoryServer() {
         args: ['-y', '@modelcontextprotocol/server-memory']
     };
 }
+/**
+ * Context-Engine MCP Server - Semantic code search and memory (SaaS)
+ *
+ * Two endpoints:
+ * - Indexer: Code indexing, symbol graphs, semantic search, graph queries
+ * - Memory: Persistent memory store, context search, memory find
+ *
+ * Environment variables:
+ * - CONTEXT_ENGINE_API_TOKEN: Bearer token for SaaS auth (e.g. ctxce_xxx)
+ * - CONTEXT_ENGINE_BASE_URL: Base URL override (default: http://localhost)
+ * - CONTEXT_ENGINE_INDEXER_URL: Full indexer URL override
+ * - CONTEXT_ENGINE_MEMORY_URL: Full memory URL override
+ * - CONTEXT_ENGINE_DISABLED: Set to "true" to disable both MCPs
+ */
+function getContextEngineConfig() {
+    if (process.env.CONTEXT_ENGINE_DISABLED === 'true')
+        return null;
+    const baseUrl = process.env.CONTEXT_ENGINE_BASE_URL ?? 'http://localhost';
+    const apiToken = process.env.CONTEXT_ENGINE_API_TOKEN ?? '';
+    const indexerUrl = process.env.CONTEXT_ENGINE_INDEXER_URL ??
+        (baseUrl.startsWith('http://localhost')
+            ? `${baseUrl}:8003/mcp`
+            : `${baseUrl}/indexer/mcp`);
+    const memoryUrl = process.env.CONTEXT_ENGINE_MEMORY_URL ??
+        (baseUrl.startsWith('http://localhost')
+            ? `${baseUrl}:8002/mcp`
+            : `${baseUrl}/memory/mcp`);
+    const headers = apiToken
+        ? { Authorization: `Bearer ${apiToken}` }
+        : {};
+    return {
+        indexer: { url: indexerUrl, ...(apiToken ? { headers } : {}) },
+        memory: { url: memoryUrl, ...(apiToken ? { headers } : {}) },
+    };
+}
+export function createContextEngineIndexerServer() {
+    return getContextEngineConfig()?.indexer ?? null;
+}
+export function createContextEngineMemoryServer() {
+    return getContextEngineConfig()?.memory ?? null;
+}
 export function getDefaultMcpServers(options) {
     const servers = {};
     if (options?.enableExa !== false) {
@@ -73,10 +115,19 @@ export function getDefaultMcpServers(options) {
     if (options?.enableMemory) {
         servers.memory = createMemoryServer();
     }
+    if (options?.enableContextEngine !== false) {
+        const ceIndexer = createContextEngineIndexerServer();
+        const ceMemory = createContextEngineMemoryServer();
+        if (ceIndexer)
+            servers['context-engine-indexer'] = ceIndexer;
+        if (ceMemory)
+            servers['context-engine-memory'] = ceMemory;
+    }
     return servers;
 }
 /**
  * Convert MCP servers config to SDK format
+ * Supports both stdio (McpServerConfig) and remote (RemoteMcpServerConfig) servers.
  */
 export function toSdkMcpFormat(servers) {
     const result = {};
