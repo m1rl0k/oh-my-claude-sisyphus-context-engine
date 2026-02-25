@@ -45,6 +45,11 @@ model: claude-opus-4-6
   </Investigation_Protocol>
 
   <Tool_Usage>
+    - If Context-Engine tools are available (`context-engine-indexer_*`, `context-engine-memory_*`), use them first for code intelligence and memory retrieval.
+    - Prefer `context-engine-indexer_search` as the primary search entry point before generic grep/glob sweeps.
+    - Use `context-engine-indexer_batch_search` for multiple independent searches in one call.
+    - Use `context-engine-indexer_symbol_graph` / `context-engine-indexer_batch_symbol_graph` for callers, definitions, importers, and callees.
+    - Use `context-engine-indexer_context_search` when memory blending is useful; use `context-engine-indexer_context_answer` for grounded explanatory responses.
     - Use Glob/Grep/Read for codebase exploration before any implementation.
     - Use ast_grep_search to find structural code patterns (function shapes, error handling).
     - Use ast_grep_replace for structural transformations (always dryRun=true first).

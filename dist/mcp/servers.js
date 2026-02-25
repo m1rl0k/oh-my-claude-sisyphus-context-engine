@@ -69,7 +69,7 @@ export function createMemoryServer() {
  *
  * Environment variables:
  * - CONTEXT_ENGINE_API_TOKEN: Bearer token for SaaS auth (e.g. ctxce_xxx)
- * - CONTEXT_ENGINE_BASE_URL: Base URL override (default: http://localhost)
+ * - CONTEXT_ENGINE_BASE_URL: SaaS base URL (default: https://dev.context-engine.ai)
  * - CONTEXT_ENGINE_INDEXER_URL: Full indexer URL override
  * - CONTEXT_ENGINE_MEMORY_URL: Full memory URL override
  * - CONTEXT_ENGINE_DISABLED: Set to "true" to disable both MCPs
@@ -77,16 +77,10 @@ export function createMemoryServer() {
 function getContextEngineConfig() {
     if (process.env.CONTEXT_ENGINE_DISABLED === 'true')
         return null;
-    const baseUrl = process.env.CONTEXT_ENGINE_BASE_URL ?? 'http://localhost';
+    const baseUrl = (process.env.CONTEXT_ENGINE_BASE_URL ?? 'https://dev.context-engine.ai').replace(/\/$/, '');
     const apiToken = process.env.CONTEXT_ENGINE_API_TOKEN ?? '';
-    const indexerUrl = process.env.CONTEXT_ENGINE_INDEXER_URL ??
-        (baseUrl.startsWith('http://localhost')
-            ? `${baseUrl}:8003/mcp`
-            : `${baseUrl}/indexer/mcp`);
-    const memoryUrl = process.env.CONTEXT_ENGINE_MEMORY_URL ??
-        (baseUrl.startsWith('http://localhost')
-            ? `${baseUrl}:8002/mcp`
-            : `${baseUrl}/memory/mcp`);
+    const indexerUrl = process.env.CONTEXT_ENGINE_INDEXER_URL ?? `${baseUrl}/indexer/mcp`;
+    const memoryUrl = process.env.CONTEXT_ENGINE_MEMORY_URL ?? `${baseUrl}/memory/mcp`;
     const headers = apiToken
         ? { Authorization: `Bearer ${apiToken}` }
         : {};

@@ -95,6 +95,14 @@ export function buildTriggerTable(agents: AgentConfig[]): string {
 export function buildToolSelectionSection(agents: AgentConfig[]): string {
   const lines: string[] = ['## Tool Selection Guidance', ''];
 
+  lines.push('### Context-Engine Priority');
+  lines.push('- If Context-Engine tools are available (`context-engine-indexer_*`, `context-engine-memory_*`), use them first for code intelligence and memory lookups.');
+  lines.push('- Prefer `context-engine-indexer_search` as the default entry point for code search before broad grep/glob sweeps.');
+  lines.push('- Use `context-engine-indexer_batch_search` for multiple independent searches in one call (preferred over many sequential searches).');
+  lines.push('- Use `context-engine-indexer_symbol_graph`/`context-engine-indexer_batch_symbol_graph` for callers/definitions/importers rather than heuristic text search.');
+  lines.push('- Use `context-engine-indexer_context_search` when code + memory blending is useful, and `context-engine-indexer_context_answer` for grounded explanatory answers.');
+  lines.push('');
+
   // Group by category
   const categorizedAgents = new Map<AgentCategory, AgentConfig[]>();
   for (const agent of agents) {
